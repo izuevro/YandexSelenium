@@ -2,6 +2,7 @@ package pages.market;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,7 +27,9 @@ public class MarketMainPage {
 
     @Step("Перейти в меню \"{item}\"")
     public MarketMainPage clickMenuListItem(String item) {
-        listMenu.findElement(By.xpath("//span[contains(text(), '" + item + "')]")).click();
+        WebElement element = listMenu.findElement(By.xpath("//span[contains(text(), '" + item + "')]"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click()", element);
         return this;
     }
 
