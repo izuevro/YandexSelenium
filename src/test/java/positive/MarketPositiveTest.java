@@ -26,12 +26,12 @@ public class MarketPositiveTest extends BaseTest {
 //
 //        WebElement login = driver.findElement(By.xpath("//*[@name='login']"));
 //        actions.moveToElement(login).click().build().perform();
-//        login.sendKeys("login");
+//        login.sendKeys("");
 //        login.submit();
 //
 //        WebElement pass = driver.findElement(By.xpath("//*[@name='passwd']"));
 //        actions.moveToElement(pass).click().build().perform();
-//        pass.sendKeys("pass");
+//        pass.sendKeys("");
 //        pass.submit();
 
         basePage.goToUrl(getMainUrl());

@@ -55,7 +55,7 @@ public class MarketCatalogPage {
 
     @Step("Выбрать производителя \"{item}\"")
     public MarketCatalogPage selectManufacturerCheckbox(String item) {
-        blockManufacturer.findElement(By.xpath("//input[@name='Производитель " + item + "']")).click();
+        blockManufacturer.findElement(By.xpath("//input[@name='Производитель " + item + "']/..")).click();
         new BasePage(driver).waitElementIsVisible(blockResults);
         return this;
     }
