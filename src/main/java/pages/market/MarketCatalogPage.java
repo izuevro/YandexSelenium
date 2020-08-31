@@ -28,8 +28,8 @@ public class MarketCatalogPage {
     @FindBy(xpath = "//div[@data-zone-name='snippetList']")
     WebElement blockResults;
 
-    @FindBy(xpath = "//article[@data-zone-name='snippet-card']")
-    WebElement blockElement;
+//    @FindBy(xpath = "//article[@data-zone-name='snippet-card']")
+//    WebElement blockElement;
 
     @FindBy(xpath = "//h3[@data-zone-name='title']")
     WebElement titleElement;
@@ -62,7 +62,7 @@ public class MarketCatalogPage {
 
     @Step("Проверить количество товаров на странице равным \"{item}\"")
     public MarketCatalogPage checkNumberOfElementsOnPage(int item) {
-        List<WebElement> list = blockResults.findElements((By) blockElement);
+        List<WebElement> list = blockResults.findElements(By.xpath("//article[@data-zone-name='snippet-card']"));
         assertEquals(item, list.size());
         return this;
     }
