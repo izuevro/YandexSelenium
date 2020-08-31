@@ -5,7 +5,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
@@ -37,11 +36,22 @@ public class BasePage {
     /**
      * Ожидание загрузки всех Ajax-запросов
      */
-    public void waitForAjaxToFinish() {
-        WebDriverWait wait = new WebDriverWait(driver, 5000);
-        wait.until((ExpectedCondition<Boolean>) wdriver
-                -> ((JavascriptExecutor) driver)
-                .executeScript("return jQuery.active == 0").equals(true));
+    public void waitForJQueryToBeActive() {
+        Boolean isJqueryUsed = (Boolean) ((JavascriptExecutor) driver)
+                .executeScript("return (typeof(jQuery) != 'undefined')");
+        if (isJqueryUsed) {
+            while (true) {
+                // JavaScript test to verify jQuery is active or not
+                Boolean ajaxIsComplete = (Boolean) (((JavascriptExecutor) driver)
+                        .executeScript("return jQuery.active == 0"));
+                if (ajaxIsComplete)
+                    break;
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                }
+            }
+        }
     }
 
     /**

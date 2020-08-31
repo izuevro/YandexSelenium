@@ -49,14 +49,14 @@ public class MarketCatalogPage {
     public MarketCatalogPage setValueInToInputPriceFrom(String item) {
         inputPriceFrom.clear();
         inputPriceFrom.sendKeys(item);
-        new BasePage(driver).waitForAjaxToFinish();
+        new BasePage(driver).waitForJQueryToBeActive();
         return this;
     }
 
     @Step("Выбрать производителя \"{item}\"")
     public MarketCatalogPage selectManufacturerCheckbox(String item) {
         blockManufacturer.findElement(By.xpath("//input[@name='Производитель " + item + "']/..")).click();
-        new BasePage(driver).waitForAjaxToFinish();
+        new BasePage(driver).waitForJQueryToBeActive();
         return this;
     }
 
