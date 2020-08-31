@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import pages.base.BasePage;
 
 import java.util.List;
 
@@ -28,9 +27,6 @@ public class MarketCatalogPage {
     @FindBy(xpath = "//div[@data-zone-name='snippetList']")
     WebElement blockResults;
 
-//    @FindBy(xpath = "//article[@data-zone-name='snippet-card']")
-//    WebElement blockElement;
-
     @FindBy(xpath = "//h3[@data-zone-name='title']")
     WebElement titleElement;
 
@@ -49,14 +45,14 @@ public class MarketCatalogPage {
     public MarketCatalogPage setValueInToInputPriceFrom(String item) {
         inputPriceFrom.clear();
         inputPriceFrom.sendKeys(item);
-        new BasePage(driver).waitForJQueryToBeActive();
+        driver.navigate().refresh();
         return this;
     }
 
     @Step("Выбрать производителя \"{item}\"")
     public MarketCatalogPage selectManufacturerCheckbox(String item) {
         blockManufacturer.findElement(By.xpath("//input[@name='Производитель " + item + "']/..")).click();
-        new BasePage(driver).waitForJQueryToBeActive();
+        driver.navigate().refresh();
         return this;
     }
 
@@ -83,9 +79,7 @@ public class MarketCatalogPage {
 
     @Step("Проверить соответствие наименования первого товара с запросом при поиске")
     public MarketCatalogPage checkTitleOfElement() {
-        String expected = textTitleElement;
-        String result = getTextOfFirstBlockElement();
-        assertEquals(expected, result);
+        assertEquals(textTitleElement, titleElement.getText());
         return this;
     }
 

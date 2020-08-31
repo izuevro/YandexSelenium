@@ -61,7 +61,7 @@ public class MarketPositiveTest extends BaseTest {
         marketCatalogPage.checkSearchFilterVisible()
                 .setValueInToInputPriceFrom("5000")
                 .selectManufacturerCheckbox("Beats")
-                .checkNumberOfElementsOnPage(12)
+                .checkNumberOfElementsOnPage(18)
                 .inputTitleElementInHeaderSearch()
                 .checkTitleOfElement();
     }

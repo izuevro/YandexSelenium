@@ -1,7 +1,6 @@
 package pages.base;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -31,27 +30,6 @@ public class BasePage {
     public WebElement waitElementIsVisible(WebElement element) {
         new WebDriverWait(driver, getExplicitWait()).until(visibilityOf(element));
         return element;
-    }
-
-    /**
-     * Ожидание загрузки всех Ajax-запросов
-     */
-    public void waitForJQueryToBeActive() {
-        Boolean isJqueryUsed = (Boolean) ((JavascriptExecutor) driver)
-                .executeScript("return (typeof(jQuery) != 'undefined')");
-        if (isJqueryUsed) {
-            while (true) {
-                // JavaScript test to verify jQuery is active or not
-                Boolean ajaxIsComplete = (Boolean) (((JavascriptExecutor) driver)
-                        .executeScript("return jQuery.active == 0"));
-                if (ajaxIsComplete)
-                    break;
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                }
-            }
-        }
     }
 
     /**
