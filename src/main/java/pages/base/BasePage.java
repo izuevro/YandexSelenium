@@ -1,9 +1,11 @@
 package pages.base;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
@@ -30,6 +32,16 @@ public class BasePage {
     public WebElement waitElementIsVisible(WebElement element) {
         new WebDriverWait(driver, getExplicitWait()).until(visibilityOf(element));
         return element;
+    }
+
+    /**
+     * Ожидание загрузки всех Ajax-запросов
+     */
+    public void waitForAjaxToFinish() {
+        WebDriverWait wait = new WebDriverWait(driver, 5000);
+        wait.until((ExpectedCondition<Boolean>) wdriver
+                -> ((JavascriptExecutor) driver)
+                .executeScript("return jQuery.active == 0").equals(true));
     }
 
     /**
